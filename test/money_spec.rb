@@ -133,7 +133,7 @@ describe Money do
     end
     
     specify "#format(:symbol => true) returns symbol based on the given currency code" do
-      one = Proc.new {|currency| Money.new(100, :currency => currency).format(:symbol => true) }
+      one = Proc.new {|currency| Money.new(100, currency).format(:symbol => true) }
 
       # Pounds
       one["GBP"].should == "£1.00"
@@ -168,20 +168,20 @@ describe Money do
     end
     
     specify "#format(:symbol => some non-Boolean value that evaluates to true) returs symbol based on the given currency code" do
-      Money.new(100, :currency => "GBP").format(:symbol => true).should == "£1.00"
-      Money.new(100, :currency => "EUR").format(:symbol => true).should == "€1.00"
-      Money.new(100, :currency => "SEK").format(:symbol => true).should == "kr1.00"
+      Money.new(100, "GBP").format(:symbol => true).should == "£1.00"
+      Money.new(100, "EUR").format(:symbol => true).should == "€1.00"
+      Money.new(100, "SEK").format(:symbol => true).should == "kr1.00"
     end
     
     specify "#format with :symbol == "", nil or false returns the amount without a symbol" do
-      money = Money.new(100, :currency => "GBP")
+      money = Money.new(100, "GBP")
       money.format(:symbol => "").should == "1.00"
       money.format(:symbol => nil).should == "1.00"
       money.format(:symbol => false).should == "1.00"
     end
     
     specify "#format without :symbol key set works as documented" do
-      money = Money.new(100, :currency => "GBP")
+      money = Money.new(100, "GBP")
       money.format.should == "£1.00"
     end
     

@@ -163,31 +163,31 @@ class Money
   # Whether a money symbol should be prepended to the result string. The default is true.
   # This method attempts to pick a symbol that's suitable for the given currency.
   #
-  #  Money.new(100, :currency => "USD")  => "$1.00"
-  #  Money.new(100, :currency => "GBP")  => "£1.00"
-  #  Money.new(100, :currency => "EUR")  => "€1.00"
+  #  Money.new(100, "USD")  => "$1.00"
+  #  Money.new(100, "GBP")  => "£1.00"
+  #  Money.new(100, "EUR")  => "€1.00"
   #  
   #  # Same thing.
-  #  Money.new(100, :currency => "USD").format(:symbol => true)  => "$1.00"
-  #  Money.new(100, :currency => "GBP").format(:symbol => true)  => "£1.00"
-  #  Money.new(100, :currency => "EUR").format(:symbol => true)  => "€1.00"
+  #  Money.new(100, "USD").format(:symbol => true)  => "$1.00"
+  #  Money.new(100, "GBP").format(:symbol => true)  => "£1.00"
+  #  Money.new(100, "EUR").format(:symbol => true)  => "€1.00"
   #
   # You can specify a false expression or an empty string to disable prepending
   # a money symbol:
   #
-  #  Money.new(100, :currency => "USD").format(:symbol => false)  => "1.00"
-  #  Money.new(100, :currency => "GBP").format(:symbol => nil)    => "1.00"
-  #  Money.new(100, :currency => "EUR").format(:symbol => "")     => "1.00"
+  #  Money.new(100, "USD").format(:symbol => false)  => "1.00"
+  #  Money.new(100, "GBP").format(:symbol => nil)    => "1.00"
+  #  Money.new(100, "EUR").format(:symbol => "")     => "1.00"
   #
   #  
   # If the symbol for the given currency isn't known, then it will default
   # to "$" as symbol:
   #
-  #  Money.new(100, :currency => "AWG").format(:symbol => true)  => "$1.00"
+  #  Money.new(100, "AWG").format(:symbol => true)  => "$1.00"
   #
   # You can specify a string as value to enforce using a particular symbol:
   #
-  #  Money.new(100, :currency => "AWG").format(:symbol => "ƒ")   => "ƒ1.00"
+  #  Money.new(100, "AWG").format(:symbol => "ƒ")   => "ƒ1.00"
   #
   # === +:html+
   #
@@ -209,7 +209,7 @@ class Money
     end
         
     if rules[:symbol] === true
-      symbol = SYMBOLS[currency[:currency]] || "$"
+      symbol = SYMBOLS[currency] || "$"
     elsif rules[:symbol]
       symbol = rules[:symbol]
     else
