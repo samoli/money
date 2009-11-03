@@ -180,6 +180,11 @@ describe Money do
       money.format(:symbol => false).should == "1.00"
     end
     
+    specify "#format without :symbol key set works as documented" do
+      money = Money.new(100, :currency => "GBP")
+      money.format.should == "£1.00"
+    end
+    
     specify "#format(:html => true) works as documented" do
       string = Money.ca_dollar(570).format(:html => true, :with_currency => true)
       string.should == "$5.70 <span class=\"currency\">CAD</span>"

@@ -198,6 +198,7 @@ class Money
   def format(*rules)
     # support for old format parameters
     rules = normalize_formatting_rules(rules)
+    rules[:symbol] = true unless rules.has_key?(:symbol)
     
     if cents == 0
       if rules[:display_free].respond_to?(:to_str)
@@ -206,17 +207,13 @@ class Money
         return "free"
       end
     end
-
-    if rules.has_key?(:symbol)
-      if rules[:symbol] === true
-        symbol = SYMBOLS[currency[:currency]] || "$"
-      elsif rules[:symbol]
-        symbol = rules[:symbol]
-      else
-        symbol = ""
-      end
+        
+    if rules[:symbol] === true
+      symbol = SYMBOLS[currency[:currency]] || "$"
+    elsif rules[:symbol]
+      symbol = rules[:symbol]
     else
-      symbol = "$"
+      symbol = ""
     end
     
     if rules[:no_cents]
